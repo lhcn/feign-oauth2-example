@@ -1,4 +1,4 @@
-# spring-cloud oauth2 example
+# oauth2 feign example
 
 ## Step 1:生成几个必须的服务
 - sco-registry Eureka 注册中心
