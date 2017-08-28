@@ -1,0 +1,25 @@
+server:
+  port: 6662
+
+logging:
+  level:
+    root: debug
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:eureka@localhost:8761/eureka/
+spring:
+  application:
+    name: consumer-service
+
+security:
+  oauth2:
+    client:
+      clientId: micro-service
+      clientSecret: service-to-service-call-secret
+      accessTokenUri: http://localhost:6660/oauth/token
+      grant-type: client_credentials
+      scope: service
+    resource:
+      user-info-uri: http://localhost:6660/me
