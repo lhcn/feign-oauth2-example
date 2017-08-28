@@ -1,0 +1,18 @@
+server:
+  port: 8761
+spring:
+  application:
+    name: eureka
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:${server.port}/eureka/
+
+security:
+  user:
+    password: eureka
+    name: eureka
+    role: USER,ADMIN
