@@ -29,7 +29,7 @@ function sInit(){
 sInit sco-registry RegistryServer "Eureka server" cloud-eureka-server
 sInit sco-oauth2-server OAuth2Server "Oauth2 server" cloud-eureka
 sInit sco-provider Provider "Provider service" cloud-eureka
-sInit sco-consumer Consumer "Consumer service" cloud-eureka,cloud-feign,cloud-hystrix,cloud-hystrix
+sInit sco-consumer Consumer "Consumer service" cloud-eureka,cloud-feign,cloud-hystrix
 
 
 ```
