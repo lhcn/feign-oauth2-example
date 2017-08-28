@@ -151,3 +151,36 @@ public void calc() throws Exception {
 ```
 
 ## Step 6 DONE
+
+值得一提的几个坑
+- oauth2 server 和 resource server 同时存在是，过滤器顺序的问题
+    ```yml
+    security:
+      oauth2:
+        resource:
+          filter-order: 3 # 当OAuth2server 和 ResourceServer同时存在是需要考虑这个优先级的问题
+      ```
+- resource server 里面权限和client_credentials 声明的要一致
+```java
+@RestController
+public class ProviderController {
+
+    @PreAuthorize("#oauth2.hasScope('service') or hasAuthority('system')")
+    @GetMapping("/add")
+....
+}
+
+public class WebSecurityConfig{ // in sco-oauth2-server
+...
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+            auth.inMemoryAuthentication()
+                    .withUser("user1").password("password1").roles("USER")
+                    .and()
+                    .withUser("user2").password("password2").roles("USER")
+                    .authorities("provider.times"); //如果没有给clientId加Authority 那就用scope来区分也可以@PreAuthorized('#oauth2.hasScope('service')
+            //auth.parentAuthenticationManager(authenticationManager);
+    }
+
+...
+}
+```
