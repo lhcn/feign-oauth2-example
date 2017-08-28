@@ -49,4 +49,17 @@ keytool -list -rfc --keystore keystore.jks | openssl x509 -inform pem -pubkey
 ```
 用SampleSecureOAuth2ApplicationTests 测试一遍
 
-## Step 3:
+## Step 3: Provider Service
+是一个ResourceServer，暂时没加注册中心,此时的
+ProviderSelfTest 中 division公开返回200，而add返回401
+```java
+    @Test
+    public void division() throws Exception {
+        this.mvc.perform(get("/division").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()).andDo(print());
+    }
+
+    @Test
+    public void add() throws Exception {
+        this.mvc.perform(get("/add").accept(MediaType.APPLICATION_JSON))
+```
