@@ -1,6 +1,6 @@
 # spring-cloud oauth2 example
 
-## 先生成几个必须的服务
+## Step 1:生成几个必须的服务
 - sco-registry Eureka 注册中心
 - sco-oauth2-server oauth2服务
 - sco-provider 服务1
@@ -29,9 +29,24 @@ function sInit(){
 sInit sco-registry RegistryServer "Eureka server" cloud-eureka-server
 sInit sco-oauth2-server OAuth2Server "Oauth2 server" cloud-eureka
 sInit sco-provider Provider "Provider service" cloud-eureka
-sInit sco-consumer Consumer "Consumer service" cloud-eureka,cloud-hystrix
+sInit sco-consumer Consumer "Consumer service" cloud-eureka,cloud-feign,cloud-hystrix,cloud-hystrix
 
 
 ```
 
 
+## Step 2: OAuth2 Server
+使用jwt，所以要先生成个key, 然后把pubkey导出来，后面分发给每个微服务使用
+```bash
+cd sco-oauth2-server/src/main/resources
+keytool -genkeypair -alias coderider -keyalg RSA -dname "CN=coderider, L=GuangZhou, ST=GuangDong, C=CN" -keypass mySecretKey -keystore keystore.jks -storepass mySecretKey
+
+keytool -list -rfc --keystore keystore.jks | openssl x509 -inform pem -pubkey
+# Enter keystore password:  mySecretKey
+
+# 复制 PUBLIC KEY 到 src/main/resources/keystore_pub.cert
+# 也可以用jhipster 那种通过rest来拿pubkey,好处就是不用到处复制，修改方便；弊端就是全部都要依赖oauth 服务才能启动
+```
+用SampleSecureOAuth2ApplicationTests 测试一遍
+
+## Step 3:
