@@ -4,7 +4,7 @@
 - sco-registry Eureka 注册中心
 - sco-oauth2-server oauth2服务
 - sco-provider 服务1
-- sco-comsumer 服务2
+- sco-consumer 服务2
 
 ```bash
 #!/bin/bash
@@ -89,9 +89,9 @@ spring:
 3. 还有 @EnableEurekaClient等注解也在前一次已经提交
 
 ## Step 5: Consumer Service
-### ProviderClient(顺手加了个hystrix,还没测试，不了解的可以忽略）
+### ProviderClient(顺手加了个hystrix）
 ```java
-@FeignClient(value = "provider-service", fallback = ProviderClient.ProviderClientHystrix.class)
+@FeignClient(value = "provider-service", fallback = ProviderClientHystrix.class)
 public interface ProviderClient {
 
     // 不加 @RequestParam 的value也报错
@@ -184,18 +184,18 @@ public void calc() throws Exception {
 
     ...
     }
-```
-- @FeiginClient的OauthToken 拦截器那三个Bean需要单独写一个 @Configuration public class FeignConfig {
+    ```
+- FeiginClient的OauthToken 拦截器那三个Bean需要单独写一个 @Configuration public class FeignConfig {
     实践证明，本例子可以在任何地方写，但是结合业务后，发现Feign的构建会再拦截器的Bean构建之前执行，导致不能拦截。
     最终独立写FeignConfig解决了这个问题
 
 
 ## 参考资料
-[jhipster uaa](https://jhipster.github.io/using-uaa/)
-[spring-cloud-security-with-oauth2](http://stytex.de/blog/2016/02/01/spring-cloud-security-with-oauth2/)
-[oauth2](https://tools.ietf.org/html/rfc6749#section-4)
-[spring-security](http://projects.spring.io/spring-security/)
-[spring-security-oauth](https://projects.spring.io/spring-security-oauth/)
+[jhipster uaa](https://jhipster.github.io/using-uaa/)  
+[spring-cloud-security-with-oauth2](http://stytex.de/blog/2016/02/01/spring-cloud-security-with-oauth2/)  
+[oauth2](https://tools.ietf.org/html/rfc6749#section-4)  
+[spring-security](http://projects.spring.io/spring-security/)  
+[spring-security-oauth](https://projects.spring.io/spring-security-oauth/)  
 [spring-security-oauth2](https://projects.spring.io/spring-security-oauth/docs/oauth2.html)
-https://github.com/spring-projects/spring-security-oauth/tree/master/samples/oauth2
+[oauth2-sample](https://github.com/spring-projects/spring-security-oauth/tree/master/samples/oauth2)
 [oauth2 sso](https://github.com/spring-guides/tut-spring-security-and-angular-js/blob/master/oauth2-vanilla/README.adoc)
