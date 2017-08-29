@@ -4,7 +4,7 @@
 - sco-registry Eureka 注册中心
 - sco-oauth2-server oauth2服务
 - sco-provider 服务1
-- sco-comsumer 服务2
+- sco-consumer 服务2
 
 ```bash
 #!/bin/bash
