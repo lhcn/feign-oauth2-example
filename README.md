@@ -89,9 +89,9 @@ spring:
 3. 还有 @EnableEurekaClient等注解也在前一次已经提交
 
 ## Step 5: Consumer Service
-### ProviderClient(顺手加了个hystrix,还没测试，不了解的可以忽略）
+### ProviderClient(顺手加了个hystrix）
 ```java
-@FeignClient(value = "provider-service", fallback = ProviderClient.ProviderClientHystrix.class)
+@FeignClient(value = "provider-service", fallback = ProviderClientHystrix.class)
 public interface ProviderClient {
 
     // 不加 @RequestParam 的value也报错
