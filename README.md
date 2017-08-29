@@ -119,7 +119,8 @@ security:
 
 #### 而拦截器直接配置即可，没有的话就是调feign时401（因为不会自己拿token和加token)
 ```java
-public class ResourceServerConfig {
+@Configuration
+public class FeignConfig {
 ...
     // 下面3个Bean 配合 application.yml 对应的EndPoint 需要加上 #oauth2.hasScope('server')
     @Bean
@@ -153,7 +154,7 @@ public void calc() throws Exception {
 ## Step 6 DONE
 
 值得一提的几个坑
-- oauth2 server 和 resource server 同时存在是，过滤器顺序的问题
+- oauth2 server 和 resource server 同时存在时，过滤器顺序的问题
     ```yml
     security:
       oauth2:
@@ -161,26 +162,40 @@ public void calc() throws Exception {
           filter-order: 3 # 当OAuth2server 和 ResourceServer同时存在是需要考虑这个优先级的问题
       ```
 - resource server 里面权限和client_credentials 声明的要一致
-```java
-@RestController
-public class ProviderController {
+    ```java
+    @RestController
+    public class ProviderController {
 
-    @PreAuthorize("#oauth2.hasScope('service') or hasAuthority('system')")
-    @GetMapping("/add")
-....
-}
-
-public class WebSecurityConfig{ // in sco-oauth2-server
-...
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-            auth.inMemoryAuthentication()
-                    .withUser("user1").password("password1").roles("USER")
-                    .and()
-                    .withUser("user2").password("password2").roles("USER")
-                    .authorities("provider.times"); //如果没有给clientId加Authority 那就用scope来区分也可以@PreAuthorized('#oauth2.hasScope('service')
-            //auth.parentAuthenticationManager(authenticationManager);
+        @PreAuthorize("#oauth2.hasScope('service') or hasAuthority('system')")
+        @GetMapping("/add")
+    ....
     }
 
-...
-}
+    public class WebSecurityConfig{ // in sco-oauth2-server
+    ...
+        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+                auth.inMemoryAuthentication()
+                        .withUser("user1").password("password1").roles("USER")
+                        .and()
+                        .withUser("user2").password("password2").roles("USER")
+                        .authorities("provider.times"); //如果没有给clientId加Authority 那就用scope来区分也可以@PreAuthorized('#oauth2.hasScope('service')
+                //auth.parentAuthenticationManager(authenticationManager);
+        }
+
+    ...
+    }
 ```
+- @FeiginClient的OauthToken 拦截器那三个Bean需要单独写一个 @Configuration public class FeignConfig {
+    实践证明，本例子可以在任何地方写，但是结合业务后，发现Feign的构建会再拦截器的Bean构建之前执行，导致不能拦截。
+    最终独立写FeignConfig解决了这个问题
+
+
+## 参考资料
+[jhipster uaa](https://jhipster.github.io/using-uaa/)
+[spring-cloud-security-with-oauth2](http://stytex.de/blog/2016/02/01/spring-cloud-security-with-oauth2/)
+[oauth2](https://tools.ietf.org/html/rfc6749#section-4)
+[spring-security](http://projects.spring.io/spring-security/)
+[spring-security-oauth](https://projects.spring.io/spring-security-oauth/)
+[spring-security-oauth2](https://projects.spring.io/spring-security-oauth/docs/oauth2.html)
+https://github.com/spring-projects/spring-security-oauth/tree/master/samples/oauth2
+[oauth2 sso](https://github.com/spring-guides/tut-spring-security-and-angular-js/blob/master/oauth2-vanilla/README.adoc)
