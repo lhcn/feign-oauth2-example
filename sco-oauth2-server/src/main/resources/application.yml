@@ -8,12 +8,21 @@ security:
   oauth2:
     resource:
       filter-order: 3 # 当OAuth2server 和 ResourceServer同时存在是需要考虑这个优先级的问题
+      user-info-uri: http://localhost:6660/me
+    client:
+      clientId: micro-service
+      clientSecret: service-to-service-call-secret
+      accessTokenUri: http://localhost:6660/oauth/token
+      grant-type: client_credentials
+      scope: service
 
 eureka:
   client:
     service-url:
       defaultZone: http://eureka:eureka@localhost:8761/eureka/
     register-with-eureka: true
+
+feign.hystrix.enabled: true
 
 spring:
   application:

@@ -71,9 +71,9 @@ public class SampleSecureOAuth2ApplicationTests {
     }
 
     @Test
-    public void everythingIsSecuredByDefault() throws Exception {
+    public void permitIndex() throws Exception {
         this.mvc.perform(get("/").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isUnauthorized()).andDo(print());
+                .andExpect(status().isOk()).andDo(print());
     }
 
     @Test
