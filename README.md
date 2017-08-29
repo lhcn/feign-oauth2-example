@@ -191,12 +191,13 @@ public void calc() throws Exception {
 
 
 ## 参考资料
+[jhipster uaa](https://jhipster.github.io/using-uaa/)  
+[spring-cloud-security-with-oauth2](http://stytex.de/blog/2016/02/01/spring-cloud-security-with-oauth2/)  
+[oauth2](https://tools.ietf.org/html/rfc6749#section-4)  
+[spring-security](http://projects.spring.io/spring-security/)  
+[spring-security-oauth](https://projects.spring.io/spring-security-oauth/)  
+[spring-security-oauth2](https://projects.spring.io/spring-security-oauth/docs/oauth2.html)  
+https://github.com/spring-projects/spring-security-oauth/tree/master/samples/oauth2）
+[oauth2 sso](https://github.com/spring-guides/tut-spring-security-and-angular-js/blob/master/oauth2-vanilla/README.adoc)  
 
-[jhipster uaa](https://jhipster.github.io/using-uaa/)
-[spring-cloud-security-with-oauth2](http://stytex.de/blog/2016/02/01/spring-cloud-security-with-oauth2/)
-[oauth2](https://tools.ietf.org/html/rfc6749#section-4)
-[spring-security](http://projects.spring.io/spring-security/)
-[spring-security-oauth](https://projects.spring.io/spring-security-oauth/)
-[spring-security-oauth2](https://projects.spring.io/spring-security-oauth/docs/oauth2.html)
-https://github.com/spring-projects/spring-security-oauth/tree/master/samples/oauth2
-[oauth2 sso](https://github.com/spring-guides/tut-spring-security-and-angular-js/blob/master/oauth2-vanilla/README.adoc)
+加换行
