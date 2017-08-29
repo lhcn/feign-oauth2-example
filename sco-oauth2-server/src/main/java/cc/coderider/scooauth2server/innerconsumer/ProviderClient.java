@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 
 
-@FeignClient(value = "provider-service", fallback = ProviderClient.ProviderClientHystrix.class)
+@FeignClient(value = "provider-service", fallback = ProviderClientHystrix.class)
 public interface ProviderClient {
 
     // 不加 @RequestParam 的value也报错
@@ -39,23 +39,6 @@ public interface ProviderClient {
             this.result = result;
         }
     }
-    
-    class ProviderClientHystrix implements ProviderClient{
 
-        @Override
-        public CalcResult add(int a, int b) {
-            return null;
-        }
-
-        @Override
-        public CalcResult minus(int a, int b) {
-            return null;
-        }
-
-        @Override
-        public CalcResult times(int a, int b) {
-            return null;
-        }
-    }
 
 }

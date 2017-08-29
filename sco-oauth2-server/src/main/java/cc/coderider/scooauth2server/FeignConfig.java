@@ -1,6 +1,6 @@
 package cc.coderider.scooauth2server;
 
-import cc.coderider.scooauth2server.innerconsumer.ProviderClient;
+import cc.coderider.scooauth2server.innerconsumer.ProviderClientHystrix;
 import feign.RequestInterceptor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.security.oauth2.client.feign.OAuth2FeignRequestInterceptor;
@@ -38,7 +38,7 @@ public class FeignConfig {
     }
 
     @Bean
-    public ProviderClient.ProviderClientHystrix providerClientHystrix(){
-        return new ProviderClient.ProviderClientHystrix();
+    public ProviderClientHystrix providerClientHystrix(){
+        return new ProviderClientHystrix();
     }
 }
