@@ -184,13 +184,14 @@ public void calc() throws Exception {
 
     ...
     }
-```
-- @FeiginClient的OauthToken 拦截器那三个Bean需要单独写一个 @Configuration public class FeignConfig {
+    ```
+- FeiginClient的OauthToken 拦截器那三个Bean需要单独写一个 @Configuration public class FeignConfig {
     实践证明，本例子可以在任何地方写，但是结合业务后，发现Feign的构建会再拦截器的Bean构建之前执行，导致不能拦截。
     最终独立写FeignConfig解决了这个问题
 
 
 ## 参考资料
+
 [jhipster uaa](https://jhipster.github.io/using-uaa/)
 [spring-cloud-security-with-oauth2](http://stytex.de/blog/2016/02/01/spring-cloud-security-with-oauth2/)
 [oauth2](https://tools.ietf.org/html/rfc6749#section-4)
