@@ -197,7 +197,5 @@ public void calc() throws Exception {
 [spring-security](http://projects.spring.io/spring-security/)  
 [spring-security-oauth](https://projects.spring.io/spring-security-oauth/)  
 [spring-security-oauth2](https://projects.spring.io/spring-security-oauth/docs/oauth2.html)  
-https://github.com/spring-projects/spring-security-oauth/tree/master/samples/oauth2）
+[oauth2-sample](https://github.com/spring-projects/spring-security-oauth/tree/master/samples/oauth2）
 [oauth2 sso](https://github.com/spring-guides/tut-spring-security-and-angular-js/blob/master/oauth2-vanilla/README.adoc)  
-
-加换行
